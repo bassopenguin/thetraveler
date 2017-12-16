@@ -1,8 +1,25 @@
+# Outputs current branch info in prompt format
+function git_prompt_info() {
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 ; then
+    echo ""
+    return
+  fi
+  local ref
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
 # Get the status of the working tree
 function git_prompt_status() {
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 ; then
+    echo ""
+    return
+  fi
   local INDEX STATUS
   INDEX=$(command git status --porcelain -b 2> /dev/null)
-  STATUS=""
+  STATUS=" "
   if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
   else
