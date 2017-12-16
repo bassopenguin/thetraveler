@@ -5,11 +5,15 @@ function git_prompt_status() {
   STATUS=""
   if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
+  else
+    STATUS=" $STATUS"
   fi
   if $(echo "$INDEX" | grep '^A  ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
   elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+  else
+    STATUS=" $STATUS"
   fi
   if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
@@ -17,6 +21,8 @@ function git_prompt_status() {
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
   elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  else
+    STATUS=" $STATUS"
   fi
   if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
@@ -27,12 +33,16 @@ function git_prompt_status() {
     STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
   elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
+  else
+    STATUS=" $STATUS"
   fi
   if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
     STATUS="$ZSH_THEME_GIT_PROMPT_STASHED$STATUS"
   fi
   if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
+  else
+    STATUS=" $STATUS"
   fi
   if $(echo "$INDEX" | grep '^## [^ ]\+ .*ahead' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_AHEAD$STATUS"
