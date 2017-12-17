@@ -8,6 +8,9 @@ Install by adding to your local custom folder for oh-my-zsh (e.g. ~/.oh-my-zsh/c
 ## Inspired by theunraveler
 I enjoyed the simple color scheme and approach to working directory status by theunraveler theme; however, I wanted to make the icons more meaningful to me (by making them more similar to each other). I also wanted to consolidate the git information with the current directory because I think this is valuable information (almost more than the current directory itself); when I moved the symbols to the left, I decided to pad them so the prompt is not constantly moving left and right as more work is done in the directory. 
 
+## Screenshot
+![Screenshot of v1.1.0 in action](/screenshot.png)
+
 ## Features
 - The git information with the current directory on the left
 - The symbols are uniform and large (increased visibility without overlapping)
